@@ -1,0 +1,24 @@
+~[if#SECURE_LOCKED_ACCOUNTS.security.pagenone=/admin/security/lockedAccounts.html]
+<!-- No Page-Level Access for System Security: Locked Accounts -->
+[else#SECURE_LOCKED_ACCOUNTS]
+<!-- UserPrefInterface: Locked Accounts -->
+
+<script>
+	$j(window).on("load", function()
+		{  
+			$j("[name='~(JSFieldParam;[pref]task_oriented_help_PS-U~[x:userid])']").closest("table").append($j("#gdm_count_locked_accounts_debug").detach().html())
+		}
+	)
+</script>
+
+
+<table id="gdm_count_locked_accounts_debug">
+	<tr class="headerRow">
+		<th colspan="2">Debug Count of Locked Accounts</th>
+	</tr>
+	<tr bgcolor="#edf3fe">
+		<td>Enable Debug</td>
+		<td><input type="checkbox" name="[pref]d-lckd-U~[x:userid]" value="1"></td>
+	</tr>
+</table>
+[/if#SECURE_LOCKED_ACCOUNTS]

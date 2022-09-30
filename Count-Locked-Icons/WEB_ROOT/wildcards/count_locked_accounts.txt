@@ -1,0 +1,53 @@
+~[if#SECURE_LOCKED_ACCOUNTS.security.pagenone=/admin/security/lockedAccounts.html]
+<!-- No Page-Level Access for System Security: Locked Accounts -->
+[else#SECURE_LOCKED_ACCOUNTS]
+<!--WC: Locked Accounts -->
+<UL id='tempLockedAccountsUL' style='display:none'>
+<li id='lockedAccountsLI'>
+<a id='lockedAccountsNum' style="width: 4em;" href='/admin/security/lockedAccounts.html' target='_top'> Temp </a>
+</li>
+</UL>
+    
+<script type="text/javascript">
+$j(document).ready(function(){
+  var locked_count = ~[tlist_sql;
+  select count (rownum) 
+  from PCAS_ACCOUNT
+  where pcas_account.islockedout = 1
+    and pcas_account.isenabled = 1
+  ]~(count)[/tlist_sql];
+  if (locked_count ~[if#debug-count.pref.d-lckd-U~[x:userid]=1]
+<!-- iF Debug Count --> || true [else#debug-count]
+<!-- Else Debug Count -->
+[/if#debug-count]
+) {
+    $j('#lockedAccountsNum').text(''+locked_count+'\n~[wc:locked_icon]')
+    $j('#lockedAccountsNum').attr('title','There are '+locked_count+' accounts currently locked out!')
+    $j('#tools2').prepend($j('#lockedAccountsLI'))
+  }
+  $j('#tempLockedAccountsUL').remove()
+});
+</script>
+
+~[if#debug-count.pref.d-lckd-U~[x:userid]=1]
+<!-- iF Debug Count -->
+<table>
+    <thead>
+<TR><TH>Username</TH><TH>E-mail Address</TH><TH>Locked out why?</TH></TR>
+</thead><tbody>
+~[tlist_sql;
+select pcas_account.username as username, emailaddress, coalesce(pcas_account.lockedoutreason,'Locked Out Reason is NULL') as lockedoutreason 
+  from PCAS_ACCOUNT
+    join pcas_emailcontact USING ( PCAS_ACCOUNTID )
+    /* join pcas_accountaccesshist USING ( PCAS_ACCOUNTID )*/ 
+where pcas_account.isenabled and pcas_account.islockedout 
+;alternatecolor;nonemessage=<tr><td colspan="100%">No records returned.</td></tr>]
+<TR><TD>~(username)</TD><TD>~(emailaddress)</TD><TD>~(lockedoutreason)</TD></TR>
+[/tlist_sql]
+</tbody>
+</table>
+
+[else#debug-count]
+<!-- Else Debug Count -->
+[/if#debug-count]
+[/if#SECURE_LOCKED_ACCOUNTS]

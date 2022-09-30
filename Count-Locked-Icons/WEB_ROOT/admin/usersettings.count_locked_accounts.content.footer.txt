@@ -1,0 +1,28 @@
+~[if#SECURE_LOCKED_ACCOUNTS.security.pagenone=/admin/security/lockedAccounts.html]
+<!-- No Page-Level Access for System Security: Locked Accounts -->
+[else#SECURE_LOCKED_ACCOUNTS]
+<!-- UserSettings: Locked Accounts -->
+
+<script>
+	$j(window).on("load", function()
+		{  
+			$j("h2:contains(~[text:psx.html.admin_usersettings.usersettings.smart_search_options])").before($j("#gdm_count_locked_accounts_debug").contents());
+		}
+	)
+</script>
+
+
+
+<div id="gdm_count_locked_accounts_debug">
+  <h2 >Debug Count of Locked Accounts</h2>
+		<div class="fluid-form">
+			<div>
+				<div>
+					<input id="enable_locked_debug" type="checkbox" name="[pref]d-lckd-U~[x:userid]" value="1"/>
+					<label for="enable_locked_debug" class="fluid-form-checkbox-label">Enable Locked Accounts Debug</label>
+				</div>
+			</div>
+		</div>
+	<!-- h2 -->
+</div>
+[/if#SECURE_LOCKED_ACCOUNTS]

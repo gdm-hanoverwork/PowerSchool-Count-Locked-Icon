@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><plugin xmlns="http://plugin.powerschool.pearson.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" description="Display Count of Locked Accounts in the PowerSchool top bar" name="gdm_Count_Locked_Accounts" version="20.09.03.0" xsi:schemaLocation="http://plugin.powerschool.pearson.com plugin.xsd">
+<publisher name="Gregory Matyola">
+<contact email="greg.matyola@hanovertwpschools.org"/>
+</publisher>
+</plugin>
