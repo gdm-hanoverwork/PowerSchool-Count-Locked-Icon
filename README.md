@@ -1,2 +1,2 @@
-# PowerSchool-Count-Locked-Icon
+# PowerSchool-Count-Locked-Icons
 Count Locked Accounts
